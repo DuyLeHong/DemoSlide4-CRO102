@@ -1,16 +1,11 @@
-import { Image, StyleSheet, Platform, View, Button, Alert } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
-import { useState } from 'react';
-
+import React, { useState } from "react";
+import { View, Button, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
 
-export default function HomeScreen() {
+const CameraScreen = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const router = useRouter();
 
   const requestPermissions = async () => {
     const { status: cameraStatus } = await ImagePicker.requestCameraPermissionsAsync();
@@ -56,25 +51,9 @@ export default function HomeScreen() {
       <Button title="Chụp ảnh" onPress={takePhoto} />
       <Button title="Chọn ảnh từ thư viện" onPress={pickImage} />
       {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200, marginTop: 20 }} />}
+      <Button title="Quay lại" onPress={() => router.back()} />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+export default CameraScreen;
