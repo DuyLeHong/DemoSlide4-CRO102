@@ -8,6 +8,10 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+export const unstable_settings = {
+  ignoreRouteGroups: true,
+};
+
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 

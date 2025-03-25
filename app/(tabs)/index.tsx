@@ -1,15 +1,8 @@
-import { Image, StyleSheet, Platform, View, Button, Alert } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
-import { useState } from 'react';
-
+import React, { useState } from "react";
+import { View, Button, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const requestPermissions = async () => {
@@ -29,7 +22,7 @@ export default function HomeScreen() {
 
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      quality: 1,
+      quality: 5,
     });
 
     if (!result.canceled) {
@@ -42,8 +35,8 @@ export default function HomeScreen() {
     if (!hasPermission) return;
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      quality: 1,
+      // allowsEditing: true,
+      quality: 5,
     });
 
     if (!result.canceled) {
@@ -58,23 +51,6 @@ export default function HomeScreen() {
       {selectedImage && <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200, marginTop: 20 }} />}
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+export default HomeScreen;
