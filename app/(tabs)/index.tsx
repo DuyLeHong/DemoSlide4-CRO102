@@ -22,7 +22,7 @@ const HomeScreen = () => {
 
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      quality: 5,
+      quality: 1,
     });
 
     if (!result.canceled) {
@@ -35,8 +35,8 @@ const HomeScreen = () => {
     if (!hasPermission) return;
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      // allowsEditing: true,
-      quality: 5,
+      allowsEditing: true,
+      quality: 1,
     });
 
     if (!result.canceled) {
